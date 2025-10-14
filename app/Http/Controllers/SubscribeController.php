@@ -21,20 +21,20 @@ class SubscribeController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => '¡Gracias por suscribirte!',
+                'message' => '¡Thank you for subscribing!',
                 'data' => $subscriber
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'El email ya está registrado o es inválido',
+                'message' => 'The email is already registered or invalid',
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error al procesar la solicitud'
+                'message' => 'Error processing request'
             ], 500);
         }
     }
