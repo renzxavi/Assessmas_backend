@@ -24,9 +24,11 @@ class AuthController extends Controller
                 'confirmed',
             ],
         ], [
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-            'password.regex' => 'La contraseña debe tener al menos una letra mayúscula y una minúscula.',
-            'password.confirmed' => 'Las contraseñas no coinciden.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.regex' => 'The password must contain at least one uppercase letter and one lowercase letter.',
+            'password.confirmed' => 'The passwords do not match.',
+            'email.unique' => 'This email address is already registered.',
+
         ]);
 
         if ($validator->fails()) {
@@ -47,7 +49,7 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Usuario registrado correctamente.',
+            'message' => 'User registered successfully.',
             'user' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',
@@ -73,7 +75,7 @@ class AuthController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Email o contraseña inválidos.',
+                'message' => 'Invalid email or password.',
             ], 401);
         }
 
@@ -81,7 +83,7 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Inicio de sesión exitoso.',
+            'message' => 'Login successful.',
             'user' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',
@@ -94,7 +96,7 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Sesión cerrada correctamente.'
+            'message' => 'Session closed successfully.'
         ]);
     }
 
@@ -102,7 +104,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'success' => true,
-            'message' => 'Bienvenido al dashboard',
+            'message' => 'Welcome to the dashboard',
             'user' => $request->user(),
         ]);
     }
